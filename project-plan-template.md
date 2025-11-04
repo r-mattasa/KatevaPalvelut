@@ -100,6 +100,6 @@ front end UI Simple
 List here any thought-out feature that doesn't make it into the MVP.
 Admin login and fill up the details
 user registration and login
-Email sent to the  registered user and create 
+Email sent to the  registered user and as well as the to the provider person (have to accept the request)
 language localization
 Modes (dark or light)
