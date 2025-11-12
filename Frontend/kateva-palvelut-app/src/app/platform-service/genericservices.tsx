@@ -7,6 +7,8 @@ export interface Identifiable {
   id: number;
 }
 
+
+
 // Function that creates a service for a specific resource path
 const createGenericService = <T extends Identifiable>(resourcePath: string) => {
   // The base URL for the API
@@ -23,6 +25,7 @@ const createGenericService = <T extends Identifiable>(resourcePath: string) => {
     return request.then(response => response.data);
   };
 
+  
   /**
    * Creates a new resource.
    * NewObject is T without the 'id' since the backend assigns it.
@@ -48,6 +51,14 @@ const createGenericService = <T extends Identifiable>(resourcePath: string) => {
     return axios.delete<void>(`${baseUrl}/${id}`).then(response => response.data);
   };
 
+  const getById = (id: number | string): Promise<T> => {
+  // Construct the specific resource URL
+  const resourceUrl = `${baseUrl}/${id}`;
+  const request = axios.get<T>(resourceUrl);
+  return request.then(response => response.data);
+};
+
+
 
   // Return the service object with all CRUD methods
   return {
@@ -55,6 +66,7 @@ const createGenericService = <T extends Identifiable>(resourcePath: string) => {
     create,
     update,
     remove,
+    getById
   };
 };
 

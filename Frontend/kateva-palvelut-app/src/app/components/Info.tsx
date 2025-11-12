@@ -8,13 +8,13 @@ export default function Footer() {
       sx={{
         py: 2,
         textAlign: 'center',
-        backgroundColor: '#6b136dff',
+        backgroundColor: 'secondary',
         color: 'white',
         mt: 'auto',
       }}
     >
       <Typography variant="body2">
-        © {new Date().getFullYear()} Kätevä palvelut — All Rights Reserved
+       Welcome to Kätevä palvelut
       </Typography>
     </Box>
   );

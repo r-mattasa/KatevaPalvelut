@@ -1,8 +1,25 @@
+"use client";
+
+import { usePathname } from 'next/navigation';
 import { Box, Typography, Container } from "@mui/material";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import Navigation from "./Navigation";
-
+const STEP_PATHS = [
+  '/services',     // Index 0
+  '/subservices',  // Index 1
+  '/booking',      // Index 2
+  '/confirmation', // Index 3
+];
 export default function Header() {
+const pathname = usePathname(); 
+  
+  let currentStepIndex = 0;
+  for (let i = STEP_PATHS.length - 1; i >= 0; i--) {
+    if (pathname.startsWith(STEP_PATHS[i])) {
+      currentStepIndex = i;
+      break; 
+    }
+  }
   return (
     <Container sx={{ flexGrow: 1, py: 2, bgcolor: "#FFFFFF", boxShadow: 1 }}>
       <Box
@@ -14,12 +31,12 @@ export default function Header() {
           borderBottom: "1px solid #e0e0e0",
         }}
       >
-        <HandshakeIcon sx={{ fontSize: 50, color: "#c4c4c4" }} />
+        <HandshakeIcon sx={{ fontSize: 50, color: "#800080" }} />
         <Typography variant="h5" sx={{ fontWeight: 500 }}>
           Kätevä Palvelut
         </Typography>
       </Box>
-      <Navigation />
+      <Navigation currentStepIndex={currentStepIndex} />
 {/*       <Box
         sx={{
           display: "flex",

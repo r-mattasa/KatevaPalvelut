@@ -8,11 +8,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import { SubServices } from "@/app/types/types";
-import { useEffect, useState } from "react";
-
 
 export default function SubServicesList({ data }: { data: SubServices[] }) {
-
   return (
     <Box sx={{ py: 4 }}> 
       <MuiGrid container spacing={3}>
@@ -20,7 +17,7 @@ export default function SubServicesList({ data }: { data: SubServices[] }) {
           <MuiGrid  key={index} sx={{ display: "flex" }}>
             <Card
               component={Link}
-              href={`/booking`} // clicking card opens sub-page
+              href={`/booking/${item.subservice_id}`} // clicking card opens sub-page
               sx={{
                 flex: 1, //  ensures equal height
                 display: "flex",

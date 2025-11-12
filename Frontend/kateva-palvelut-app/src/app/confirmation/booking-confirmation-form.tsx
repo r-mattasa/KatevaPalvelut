@@ -2,8 +2,10 @@
 
 import { Box, TextField, Typography, Checkbox, FormControlLabel, Button, Stack, useTheme, Divider } from "@mui/material";
 import React, { useState } from "react";
+import { BookingProps, ConfirmationProps } from "../types/types";
+import ReservationConfirmation from "./reservation-confirmation";
+import { useRouter } from 'next/navigation';
 
-// You would define a more robust type for form data in a real app
 interface FormData {
   firstName: string;
   lastName: string;
@@ -15,8 +17,10 @@ interface FormData {
   marketingText: boolean;
 }
 
-const BookingConfirmationForm: React.FC = () => {
+const BookingConfirmationForm: React.FC<BookingProps> = (props) => {
   const theme = useTheme();
+  const router = useRouter();
+
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -27,8 +31,9 @@ const BookingConfirmationForm: React.FC = () => {
     marketingEmail: false,
     marketingText: false,
   });
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [successBookingId, setSuccessBookingId] = useState('');
   
-  // Basic change handler for all fields
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = e.target;
     setFormData(prev => ({
@@ -37,26 +42,72 @@ const BookingConfirmationForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const getConfirmationProps = (): ConfirmationProps => ({
+        freelancerName: props.providerName || "Service Provider", 
+        bookingDate: props.bookingDate, 
+        startTime: props.slotStartTime,
+        duration: Number(props.slotDuration), 
+        isLoggedIn: true, 
+        bookingId: successBookingId
+    });
+
+  const handleConfirmedBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.acceptTerms) {
       alert("You must accept the terms to confirm the booking.");
       return;
     }
+    const payload = {
+        customer: formData, // get data from the form inputs
+        booking: props,   // get data from URLSearchParams
+    };
     console.log("Submitting Booking:", formData);
-    // 💡 Here you would call your API to finalize the reservation
+       try {
+          const response = await fetch('http://localhost:5000/reservation/book-appointment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            
+        });
+        if (response.ok) {
+                const responseData = await response.json();
+                console.log("Booking Success:", responseData);
+                setIsConfirmed(true);
+                setSuccessBookingId(responseData.bookingId);
+            } else {
+                const errorData = await response.json();
+                console.error("API Booking Failed:", errorData.message);
+                alert(`Booking Failed: ${errorData.message}`);
+                return false; 
+            }
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
   };
 
+    if (isConfirmed) {
+        return (
+            // You might want to wrap this in a Grid item to match your overall layout
+            <Box sx={{ width: '100%', alignItems: "center", textAlign:'center' }}> 
+                <ReservationConfirmation {...getConfirmationProps()} />
+            </Box>
+        );
+    }
+  
   return (
     <Box 
       component="form" 
-      onSubmit={handleSubmit} 
+      onSubmit={handleConfirmedBooking} 
       sx={{ 
         p: 4, 
         maxWidth: 600, 
-        mx: 'auto' 
+        mx: 'auto', 
+        boxShadow: 3
       }}
     >
+      <Typography variant="h6" color="#9928a3ff" fontWeight="bold" margin={1} padding={1}>
+        Verify and Finalize your Booking
+      </Typography>
       <Stack spacing={3}>
         
         {/* First Name */}
@@ -129,7 +180,8 @@ const BookingConfirmationForm: React.FC = () => {
           }
           label={
             <Typography variant="body2">
-              I accept booksalos <a href="#" style={{ color: theme.palette.primary.main }}>terms of use and cancellation</a>, as well as <a href="#" style={{ color: theme.palette.primary.main }}>its privacy policy.</a>
+              I accept KatevaPalvelut <a href="#" style={{ color: theme.palette.primary.main }}>terms of use and cancellation</a>,
+              as well as <a href="#" style={{ color: theme.palette.primary.main }}>its privacy policy.</a>
             </Typography>
           }
         />
@@ -143,13 +195,13 @@ const BookingConfirmationForm: React.FC = () => {
           variant="contained"
           size="large"
           disabled={!formData.acceptTerms} // Button disabled until terms are accepted
-          sx={{ py: 1.5, mt: 3, bgcolor: theme.palette.info.main }} // Use info color for the distinct blue
+          sx={{ py: 1.5, mt: 3, bgcolor: theme.palette.secondary.main }} // Use info color for the distinct blue
         >
           Confirm booking
         </Button>
         
-        <Button variant="text" color="inherit" onClick={() => console.log('Cancel clicked')}>
-            CANCEL
+        <Button variant="text" color="inherit" onClick={() => router.back()}>
+            CANCEL / GO BACK TO CHANGE
         </Button>
       </Stack>
     </Box>

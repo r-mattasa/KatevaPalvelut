@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -33,7 +34,7 @@ export default function RootLayout({
             {/* Another Content Section */}
         <Container sx={{ flexGrow: 1, py: 4, bgcolor: "#FFFFFF", boxShadow: 2, borderRadius: 1 }}>
           <Header />
-          <Box sx={{ bgcolor: "#ffffff", height: "100vh" }}>{children}</Box>
+          <Box sx={{ bgcolor: "#ffffff", minHeight: "100vh" }}>{children}</Box>
           <Footer />
         </Container>
 

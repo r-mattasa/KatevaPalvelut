@@ -1,75 +1,45 @@
 "use client";
 
-import { Box, Typography, Button, Stack, useTheme } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-
-interface ConfirmationProps {
-  isLoggedIn: boolean;
-  freelancerName: string; 
-}
+import { Box, Typography, useTheme } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { ConfirmationProps } from "../types/types";
 
 const ReservationConfirmation: React.FC<ConfirmationProps> = (props: ConfirmationProps) => {
   const theme = useTheme();
 
   return (
-    <Box 
-      sx={{ 
-        textAlign: 'center', 
-        p: 4, 
-        border: `2px solid ${theme.palette.success.main}`, 
+    <Box
+      sx={{
+        textAlign: "center",
+        p: 2,
+        m: 2,
         borderRadius: 2,
-        bgcolor: theme.palette.success.light + '10', // Light background tint
-        alignItems: "center"
+        alignItems: "center",
+        minHeight: "50vh",
+        width: "100%",
       }}
     >
       {/* Success Message */}
-      <CheckCircleIcon sx={{ fontSize: 60, color: theme.palette.success.main, mb: 2 }} />
-      <Typography variant="h4" gutterBottom fontWeight="bold">
+      <CheckCircleIcon sx={{ fontSize: 30, color: theme.palette.secondary.dark, mb: 2 }} />
+      <Typography variant="h6" fontWeight="bold">
         Reservation Confirmed!
       </Typography>
-      <Typography variant="subtitle1" color="text.secondary" mb={4}>
-        Your appointment with {props.freelancerName} is booked. You will receive an email confirmation shortly.
+      <Typography variant="h6" fontWeight="bold">
+        Your appointment with {props.freelancerName} is booked.
       </Typography>
-
-      <Stack 
-        direction={{ xs: 'column', sm: 'row' }} // Stack vertically on mobile, horizontally on desktop
-        spacing={2} 
-        justifyContent="center"
-      >
-        {props.isLoggedIn ? (
-          // === Logged-in User CTAs ===
-          <>
-            <Button 
-              variant="outlined"
-              onClick={() => console.log('Go to Booking History')}
-              size="large"
-            >
-              View All Bookings
-            </Button>
-          </>
-        ) : (
-          // === Guest User CTAs ===
-          <>
-            <Button 
-              variant="contained" 
-              color="secondary" // Use a strong contrasting color for Registration
-              startIcon={<PersonAddIcon />}
-              onClick={() => console.log('Go to Registration Page')}
-              size="large"
-            >
-              **Create a Free Account**
-            </Button>
-            <Button 
-              variant="outlined"
-              onClick={() => console.log('Continue as Guest / View Booking ID')}
-              size="large"
-            >
-              Back to Services
-            </Button>
-          </>
-        )}
-      </Stack>
+      <Typography variant="h6" fontWeight="bold">
+        Your bookingId is : {props.bookingId}
+      </Typography>
+      <Typography variant="h6" mb={4}>
+        Your appointment at{" "}
+        <Box component="span" color="secondary.dark" fontWeight="bold">
+          {props.startTime} {props.bookingDate}
+        </Box>{" "}
+        that takes about 45 minutes of time.
+      </Typography>
+      <Typography variant="h6" color="theme.palette.secondary.dark" mb={4} sx={{ p: 1 }}>
+        You will receive an email confirmation shortly.
+      </Typography>
     </Box>
   );
 };

@@ -1,32 +1,10 @@
 
 import { SubServices } from "@/app/types/types";
-import { subService } from "../../platform-service/platformservices";
+import { subService, platformServices } from "../../platform-service/platformservices";
 import SubServicesList from "./subServicesList";
+import { Box, Typography } from '@mui/material';
 
-/* const services = [
-  {
-    title: "Liikunnan ja valmennuksen palvelutoiminta",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    slug: "liikunta",
-  },
-  {
-    title: "Jalkojenhoitopalvelut",
-    slug: "jalkojenhoito",
-  },
-  {
-    title: "Parturi- ja kampaajapalvelut",
-    slug: "parturi-kampaamo",
-  },
-  {
-    title: "OSAO kauneudenhoitopalvelut opiskelijatyönä",
-    slug: "kauneudenhoito-opiskelijat",
-  },
-  {
-    title: "Kontinkankaan opiskelijahieronta",
-    slug: "opiskelijahieronta",
-  },
-]; */
+
 
 const getFilteredSubServices = async (serviceId: string): Promise<SubServices[]> => {
   // Convert the string ID from the URL param to a number
@@ -37,23 +15,25 @@ const getFilteredSubServices = async (serviceId: string): Promise<SubServices[]>
   return filteredServices;
 };
 
-export default async function SubServicePage( props : { params: Promise<{ id: string }> }) {
-  // Access params.id directly here - it's safe in an async Server Component
-   const { id } = await props.params;
+export default async function SubServicePage(props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params; // access params id as a promise
   console.log("id is ", id);
-  
+  const getServiceName = await platformServices.getById(id);
+  console.log("fetch", getServiceName);
   const subservices = await getFilteredSubServices(id);
 
   return (
-    <div>
-      <h1>Subservices for Service ID: {id}</h1>
+    <Box sx={{ alignContent: 'center' , m:4,}} >
+
+     
+      <Box sx={{alignContent: 'center',height:'auto', width:'30%',p:2, m:4, bgcolor:'#f5f2f5ff', alignItems:'center'}} >
+      <Typography variant="subtitle2" fontWeight="bold" textAlign="center" color="#2c2929ff">
+               The Chosen service: {getServiceName.name ?? 'rest'}
+      </Typography>
+        </Box>
+
+ 
       <SubServicesList data={subservices} />
-    </div>
+    </Box>
   );
 }
-
-// export default function ServicesPage() {
-/* export default  function SubServicePage({ params }: { params: {id: string}}) {
-  const subservices = await getFilteredSubServices(params.id);
- 
-} */

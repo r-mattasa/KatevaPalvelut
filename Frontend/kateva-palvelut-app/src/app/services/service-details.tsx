@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Services } from "../types/types";
 import Link from "next/link";
 import Box from "@mui/material/Box";
@@ -43,13 +43,27 @@ import { platformServices } from "../platform-service/platformservices";
  */
 const ServiceDetails: React.FC = () => {
   const [allServices, setAllServices] = useState<Services[]>([]);
-  platformServices.getAll().then((services) => {
-    setAllServices(services);
-  });
+  useEffect(() => {
+    // 
+    const fetchServices = async () => {
+      try {
+        const services = await platformServices.getAll();
+        console.log("---services---", services);
+        
+        // 2. Set the state after the data is fetched
+        setAllServices(services);
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      }
+    };
+
+
+    fetchServices();
+  }, []);
 
   return (
     <Box sx={{ py: 4 }}>
-      <Grid container spacing={2} alignItems="stretch">
+      <Grid container spacing={4} alignItems="stretch">
         {allServices?.map((item, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index} sx={{ display: "flex" }}>
             <Card
@@ -60,8 +74,8 @@ const ServiceDetails: React.FC = () => {
                 width: 200,
                 height: 250,
                 display: "flex",
-                flexDirection: "column", //  stacking items vertically
-                alignItems: "center", //  centers horizontally
+                flexDirection: "column", 
+                alignItems: "center",
                 textAlign: "center",
                 borderRadius: 2,
                 p: 3,
@@ -72,7 +86,7 @@ const ServiceDetails: React.FC = () => {
             >
               <CardMedia
                 component="img"
-                image="/images/childcare.jpg"
+                image={`${item.image_url}`}
                 sx={{
                   width: 100,
                   height: 100,
@@ -86,7 +100,7 @@ const ServiceDetails: React.FC = () => {
 
               <CardContent
                 sx={{
-                  flexGrow: 1, // ensures text area fills height evenly
+                  flexGrow: 1,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",

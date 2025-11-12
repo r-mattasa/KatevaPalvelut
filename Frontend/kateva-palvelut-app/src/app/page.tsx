@@ -17,13 +17,12 @@ export default function Home() {
   }}>
 
       <Typography variant="h6" gutterBottom>
-        Welcome to your Kateva palvelut
+        Welcome to Käteväpalvelut
       </Typography>
       <Typography variant="h6" gutterBottom>
         Choose your service category
       </Typography>
       <ServicesPage />
-      <Button variant="contained">Start Building</Button>
     </Box>
   );
 }
