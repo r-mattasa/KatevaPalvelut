@@ -11,15 +11,13 @@ const getFilteredSubServices = async (serviceId: string): Promise<SubServices[]>
   const idToFilter = Number(serviceId);
   const allServices = await subService.getAll();
   const filteredServices = allServices.filter((i) => i.service_id === idToFilter);
-  console.log("Filtered...", allServices, idToFilter, filteredServices);
   return filteredServices;
 };
 
 export default async function SubServicePage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params; // access params id as a promise
-  console.log("id is ", id);
+
   const getServiceName = await platformServices.getById(id);
-  console.log("fetch", getServiceName);
   const subservices = await getFilteredSubServices(id);
 
   return (

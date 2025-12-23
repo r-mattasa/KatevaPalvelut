@@ -9,7 +9,7 @@ import { BookingProps } from "../types/types";
 
 const ReservationConfirmationPage: React.FC = () => {
    const params = useSearchParams(); 
-   console.log("Parsms...", params);
+
    const reservationProps: BookingProps = {
          profileId: params.get('profileId'),
          description: params.get('description'),
@@ -18,7 +18,8 @@ const ReservationConfirmationPage: React.FC = () => {
          slotEndTime: params.get('slotEndTime'),
          slotDuration: Number(params.get('slotDuration')),
          providerName: params.get('providerName'),
-         bookingDate:params.get('bookingDate')
+         bookingDate:params.get('bookingDate'),
+         subServiceName:params.get('subServiceName')
     };
   return (
     <Box sx={{ py: 4, mt:6, boxShadow: 3, borderRadius: 0, backgroundColor:'#ffffff', textAlign:'center' }}>

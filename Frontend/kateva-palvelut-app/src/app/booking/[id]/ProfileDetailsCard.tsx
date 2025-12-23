@@ -26,14 +26,13 @@ const ProfileDetailsCard: React.FC<ProfileDetailsProps> = ({key, profile, select
     setShowBioDetails(!showBioDetails);
   };
   const providerId = profile.profile_id;
-  console.log("Keyyy", key)
+ 
   const apiUrl = `http://localhost:5000/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
 
 // Fetch the data
 fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
-    console.log("Available Slots:", data);
     setTimeSlotsDetails(data);
     // data will look like: [{ time: "09:00", duration: 30 }, { time: "09:30", duration: 30 }, ...]
   })

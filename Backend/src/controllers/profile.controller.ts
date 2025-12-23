@@ -3,7 +3,6 @@ import type { ProviderProfile } from "../type/types";
 import { executeQuery } from "../db_config/db";
 
 export const createProfile = async (profile: ProviderProfile) => {
-  console.log("profiles valuesssssssssssssssssssssssssssssssss",profile);
   const query = `INSERT INTO "service_provider_profiles" ("name", "email", "description", "phone_number", "active", "subservice_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
   const parameters = [profile.name, profile.email, profile.description, profile.phone_number, profile.active, profile.subservice_id];
   const result = await executeQuery(query, parameters);

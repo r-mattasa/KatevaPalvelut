@@ -8,14 +8,13 @@ export interface IProfile {
 export interface ConfirmationProps {
   isLoggedIn: boolean;
   freelancerName: string;
+   serviceName: string
 }
 
-// Base interface ensures all resources have an ID
 export interface Identifiable {
   id: number;
 }
 
-// 1. Service Interface
 export interface Services extends Identifiable {
   service_id: number;
   name: string;
@@ -26,7 +25,7 @@ export interface Services extends Identifiable {
 export interface SubServices extends Identifiable {
   subservice_id: number;
   name: string;
-  service_id: number; // Foreign key linking to the parent Service
+  service_id: number; 
   description: string;
 }
 
@@ -42,7 +41,7 @@ export interface ProfileDetails extends Identifiable {
 
 export interface BookingDetails extends Identifiable {
   customerId: number;
-  serviceId: number; // A list of services/subservices booked
+  serviceId: number; 
   bookingstatus: string;
   status: "pending" | "active" | "completed";
 }
@@ -50,18 +49,18 @@ export interface BookingDetails extends Identifiable {
 export interface AppointmentSlotProps {
   start_time: string;
   end_time: string;
-  booking_date: string; // Used by handleBookingClick
-  duration: string; // Used by handleBookingClick
+  booking_date: string; 
+  duration: string; 
   name: string;
   description: string;
-  profileId: number; // Used by handleBookingClick
-  subserviceId: number; // Used by handleBookingClick
+  profileId: number; 
+  subserviceId: number; 
 }
 
 export interface BookingConfirmationProps {
   start_time: string;
-  end_time: string; // Used by handleBookingClick
-  duration: string; // Used by handleBookingClick
+  end_time: string; 
+  duration: string;
   name: string;
   description: string;
   profileId: number; 
@@ -77,6 +76,7 @@ export interface BookingProps {
   slotDuration: number | 45; 
   providerName: string | null;
   bookingDate: string | null;
+  subServiceName: string | null
 }
 
 

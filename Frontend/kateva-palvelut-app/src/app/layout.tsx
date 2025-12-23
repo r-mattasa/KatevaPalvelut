@@ -34,7 +34,7 @@ export default function RootLayout({
             {/* Another Content Section */}
         <Container sx={{ flexGrow: 1, py: 4, bgcolor: "#FFFFFF", boxShadow: 2, borderRadius: 1 }}>
           <Header />
-          <Box sx={{ bgcolor: "#ffffff", minHeight: "100vh" }}>{children}</Box>
+          <Box sx={{ bgcolor: "#ffffff", minHeightheight: "100vh" }}>{children}</Box>
           <Footer />
         </Container>
 

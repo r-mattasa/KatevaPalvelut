@@ -18,7 +18,6 @@ export const pool = new pg.Pool({
 pool.connect()
   .then(() => console.log("Connected to PostgreSQL", process.env.KP_PG_DATABASE))
   .catch((error: any) => {
-    // console.log(KP_PG_USERNAME);
     console.error("Database connectionnnn error:", error);
     // Some runtimes or TypeScript lib settings may not have AggregateError typed; detect aggregate-like shape safely
     const innerErrors = error && (error as any).errors;
@@ -33,7 +32,7 @@ pool.connect()
 export const executeQuery = async (query: string, parameters?: Array<any>) => {
   const client = await pool.connect();
   try {
-    // console.log("Query....",parameters);
+
     const result = await client.query(query, parameters);
     return result;
   } catch (error: any) {

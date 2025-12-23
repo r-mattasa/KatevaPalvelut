@@ -58,8 +58,6 @@ const createGenericService = <T extends Identifiable>(resourcePath: string) => {
   return request.then(response => response.data);
 };
 
-
-
   // Return the service object with all CRUD methods
   return {
     getAll,

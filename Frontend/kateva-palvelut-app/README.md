@@ -2,9 +2,9 @@
 
 ## Overview
 
-This repository contains the code for a multi-platform service application designed to handle a step-by-step booking process. The project is split into a robust frontend built with **Next.js** and a scalable backend API powered by **Express**, both written entirely in **TypeScript**. For Frontend Styling: i have used Material-UI (MUI): Component library for consistent UI design and implementation.
+This repository contains the code for a multi-platform service application designed to handle a step-by-step booking process. The project is split into a frontend built with **Next.js** and a scalable backend API powered by **Express**, both written in **TypeScript**. For Frontend Styling: I have used Material-UI (MUI): Component library for consistent UI design and implementation.
 
-The primary goal is to provide a smooth, guided user experience for selecting services, customizing sub-services, making a reservation, and receiving confirmation.
+The primary goal is to provide a guided user experience for selecting services, sub-services, making a reservation, and receiving confirmation.
 
 ### Getting Started
 
@@ -19,7 +19,7 @@ Follow these steps to get the frontend and backend running locally.
 
 ### 1. Database Setup
 
-1. Create a new PostgreSQL database (e.g., `service_booking_db`).
+1. Create a new PostgreSQL database (for e.g., `service_booking_db`).
 2. Run your initial SQL schema scripts (not included in this repo) to create necessary tables (`services`, `subservices`, `appointments`, etc.).
 
 ### 2. Backend Installation & Setup

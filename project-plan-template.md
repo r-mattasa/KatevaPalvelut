@@ -90,11 +90,6 @@ middle wares
 
 ## Extra: Proposed timeline
 
-What order are you planning to implement your features in?
-DB schema
-back end endpoints
-front end UI Simple
-
 ## Optional features
 
 List here any thought-out feature that doesn't make it into the MVP.

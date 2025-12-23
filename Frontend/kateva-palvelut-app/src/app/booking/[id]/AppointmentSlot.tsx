@@ -1,18 +1,44 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState }  from "react";
 import { Box, Typography, Avatar,  useTheme,  Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useRouter } from 'next/navigation';
 import { AppointmentSlotProps } from "@/app/types/types";
+import { subService } from "@/app/platform-service/platformservices";
 
 
 const AppointmentSlot: React.FC<AppointmentSlotProps> = (props) => {
   const theme = useTheme();
 
   const router = useRouter(); 
+  const [subServiceName, setSubServiceName] = useState<string | null>(null);
+  useEffect(() => {
+        // 1. Define an async function inside the effect
+        const fetchSubserviceName = async () => {
+            // Ensure subserviceId is available before making the call
+            if (props.subserviceId) {
+                try {
+                    const result = await subService.getById(props.subserviceId);
   
-  const handleBookingClick = () => {
+                    setSubServiceName(result.name); 
+
+                } catch (error) {
+                    console.error("Failed to fetch subservice:", error);
+                    setSubServiceName("Error fetching service");
+                }
+            } else {
+                // Clear the state if the ID is missing
+                setSubServiceName(null);
+            }
+        };
+
+        // 4. Call the async function immediately
+        fetchSubserviceName();
+
+     }, [props.subserviceId]);
+  
+  const handleBookingClick = async() => {
     const donePageUrl = `/confirmation`;
-    
     // All required data is accessed directly from the props object
     const queryParams = new URLSearchParams({
       profileId: props.profileId ? props.profileId.toString() : '',
@@ -20,9 +46,10 @@ const AppointmentSlot: React.FC<AppointmentSlotProps> = (props) => {
       subServiceId: props.subserviceId ? props.subserviceId.toString() : '',
       slotStartTime: props.start_time,
       slotEndTime: props.end_time,
-      slotDuration: props.duration, 
+      slotDuration: props.duration,
       providerName: props.name,
-      bookingDate: props.booking_date
+      bookingDate: props.booking_date,
+      subServiceName: subServiceName? subServiceName.toString() : ''
     }).toString();
 
     router.push(`${donePageUrl}?${queryParams}`);

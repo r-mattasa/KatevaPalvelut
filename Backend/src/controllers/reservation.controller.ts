@@ -103,10 +103,10 @@ const transporter = nodemailer.createTransport({
 
 export const sendBookingConfirmationEmail = async (to:string, name:string, bookingId:string) => {
  const mailOptions = {
-    from: `"My MVP App" <${process.env.EMAIL_USER}>`,
+    from: `"My KTP App" <${process.env.EMAIL_USER}>`,
     to,
-    subject: "Welcome to MVP App!",
-    text: `Hi ${name}, thanks for registering with Katevä Palvelut - your booking Id is ${bookingId}  .`,
+    subject: "Welcome to KTP App!",
+    text: `Hi ${name}, Thanks for registering with Katevä Palvelut - your booking Id is ${bookingId}  .`,
   };
 
   await transporter.sendMail(mailOptions);

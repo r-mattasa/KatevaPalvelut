@@ -1,9 +1,9 @@
 import { ProfileDetails } from "../../types/types";
-import { Avatar, Box, Card } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import ProfileCard from "./ProfileCard";
 
 export const ProfileDetailsList = ({ profiles, BookingDate, subService }: { profiles: ProfileDetails[]; BookingDate: string; subService: number }) => {
-  console.log("profiles-----", profiles);
+
 
   return (
     <>
@@ -14,7 +14,6 @@ export const ProfileDetailsList = ({ profiles, BookingDate, subService }: { prof
             profile={profile} 
             selectedDate={BookingDate}
             subService={subService}
-
           />
         ))
       ) : (

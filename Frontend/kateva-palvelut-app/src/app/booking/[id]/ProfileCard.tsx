@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Card, Box } from "@mui/material";
 import { ProfileDetails } from "../../types/types";
@@ -28,7 +29,7 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
 
   // Use useEffect to run the fetch operation only when dependencies change
   useEffect(() => {
-    if (!providerId || !selectedDate) return; // Prevent fetch if data is missing
+    if (!providerId || !selectedDate) return; 
 
     const apiUrl = `http://localhost:5000/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
 
@@ -42,9 +43,7 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         const data: TimeSlots[] = await response.json();
-        console.log("Available Slots:", data);
         setTimeSlotDetails(data);
       } catch (err) {
         console.error("Error fetching slots:", err);
@@ -56,8 +55,6 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
     };
 
     fetchTimeSlots();
-
-    // Dependency Array: Reruns fetch whenever providerId or selectedDate changes
   }, [providerId, selectedDate]);
 
   return (
@@ -71,7 +68,6 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
         mb: 2,
         boxShadow: 3,
         borderRadius: 2,
-        // Add a hover effect for better UX
         "&:hover": {
           boxShadow: 6,
           cursor: "pointer",
@@ -86,8 +82,7 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
         ): (
       TimeSlotDetails?.map((slot, index) => (
         <AppointmentSlot 
-  
-            key={index} 
+            key={slot.start_time} 
             // --- TIME SLOT DATA (Individual to this item) ---
             booking_date= {selectedDate}
             start_time={slot.start_time}

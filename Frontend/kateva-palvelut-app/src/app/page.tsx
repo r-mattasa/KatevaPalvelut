@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box,  Typography } from "@mui/material";
 import ServicesPage from "../../src/app/services/page" 
 
 export default function Home() {

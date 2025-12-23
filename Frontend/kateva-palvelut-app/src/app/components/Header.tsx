@@ -32,7 +32,7 @@ const pathname = usePathname();
         }}
       >
         <HandshakeIcon sx={{ fontSize: 50, color: "#800080" }} />
-        <Typography variant="h5" sx={{ fontWeight: 500 }}>
+        <Typography variant="h5" sx={{ fontWeight: 500 ,color: "#800080" }}>
           Kätevä Palvelut
         </Typography>
       </Box>

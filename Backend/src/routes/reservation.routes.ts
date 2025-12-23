@@ -60,15 +60,15 @@ router.post("/book-appointment", async (req: Request<{}, {}, RequestBody>, res: 
     };
     const newBooking = await createBooking(bookingRecord);
 
-    //5. Sucess Email¨
-/*     try {
+
+     try {
       await sendBookingConfirmationEmail(customer.email, customer.firstName, newBooking.booking_id);
     } catch (emailError) {
       console.error("Failed to send booking confirmation email:", emailError);
-      // Optional: continue without failing the booking
-    } */
+    
+    } 
 
-    // 4. Success responses
+    // tSuccess responses
     return res.status(201).json({
       message: "Booking successfully confirmed.",
       bookingId: newBooking.booking_id,
@@ -98,7 +98,6 @@ router.post("/book-appointment", async (req: Request<{}, {}, RequestBody>, res: 
 
 router.get("/", async (req: Request, res: Response) => {
   const { booking_date, subservice_id } = req.query;
-  console.log("Filters:", booking_date, subservice_id);
 
   const dateRequested = req.params.booking_date;
   // const subservice_id  = req.params.subservice_id;
@@ -124,7 +123,6 @@ router.get(
     const providerId = Number(req.params.providerId);
     const dateRequested = req.query.bookingDate as String;
 
-    // console.log('Filters:', providerId, 'Date:', dateRequested);
 
     if (isNaN(providerId) || !dateRequested || typeof dateRequested !== "string") {
       return res.status(400).json({ message: "Invalid providerId or missing date." });

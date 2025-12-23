@@ -4,8 +4,7 @@ import { executeQuery } from "../db_config/db";
 import { randomUUID } from "crypto";
 
 export const createBooking = async (booking: NewBooking) => {
-  console.log("bookings---val",booking);
- 
+
   const query = `INSERT INTO "bookings" ("subservice_id", "customer_id", "provider_profile_id", "booking_status", "booking_date", "start_time", "end_time", "total_hours") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
   const parameters = [ booking.subservice_id, booking.customer_id, booking.provider_profile_id, booking.booking_status, booking.booking_date, booking.start_time, booking.end_time, booking.total_hours];
   const result = await executeQuery(query, parameters);

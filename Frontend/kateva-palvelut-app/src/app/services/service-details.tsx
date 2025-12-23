@@ -48,7 +48,6 @@ const ServiceDetails: React.FC = () => {
     const fetchServices = async () => {
       try {
         const services = await platformServices.getAll();
-        console.log("---services---", services);
         
         // 2. Set the state after the data is fetched
         setAllServices(services);
