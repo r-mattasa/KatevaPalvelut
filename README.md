@@ -1,46 +1,87 @@
-# KäteväPalvelut
+# Multi-Service Platform -  Booking App - Kätevä Palvelut
 
+## Overview
 
+This repository contains the code for a multi-platform service application designed to handle a step-by-step booking process. The project is split into a frontend built with **Next.js** and a scalable backend API powered by **Express**, both written in **TypeScript**. For Frontend Styling: I have used Material-UI (MUI): Component library for consistent UI design and implementation.
 
-## Getting started
+The primary goal is to provide a guided user experience for selecting services, sub-services, making a reservation, and receiving confirmation.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Getting Started
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Follow these steps to get the frontend and backend running locally.
+Follow these steps to get the frontend and backend running locally.
 
-## Add your files
+### Prerequisites
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- Node.js (v18 or higher)
+- npm or yarn
+- A running **PostgreSQL** instance
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/r-mattasa/kateva-palvelut.git
-git branch -M main
-git push -uf origin main
-```
+### 1. Database Setup
 
-## Integrate with your tools
+1. Create a new PostgreSQL database (for e.g., `service_booking_db`).
+2. Run your initial SQL schema scripts (not included in this repo) to create necessary tables (`services`, `subservices`, `appointments`, etc.).
 
-- [ ] [Set up project integrations](https://gitlab.com/r-mattasa/kateva-palvelut/-/settings/integrations)
+### 2. Backend Installation & Setup
 
-## Collaborate with your team
+1. Navigate to the `backend/` directory:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+   ```bash
+   cd backend
+   npm install
+   ```
 
-## Test and Deploy
+2. Create a `.env` file in the `backend/` directory and add your database connection string and port:
 
-Use the built-in continuous integration in GitLab.
+   ``` text
+   # .env file in backend/
+   DATABASE_URL="postgresql://user:password@host:port/service_booking_db"
+   PORT=5000
+   ```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+3. Start the backend API (using `ts-node` or `nodemon`):
 
-***
+   ```bash
+   npm run dev
+   ```
 
+   The API should now be running at `http://localhost:5000`.
+
+### 3. Frontend Installation & Setup
+
+1. Navigate to the `frontend/` directory:
+
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+2. Create a `.env.local` file in the `frontend/` directory to define the public API endpoint:
+
+   ``` text
+   # .env.local file in frontend/
+   NEXT_PUBLIC_API_URL=http://localhost:5000
+   ```
+
+3. Start the Next.js development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   The application should now be accessible at `http://localhost:3000`.
+
+  ![katevapalvelut](./assests_readme/img1.png)
+  ![katevapalvelut](./assests_readme/img2.png)
+  ![katevapalvelut](./assests_readme/img3.png)
+  ![katevapalvelut](./assests_readme/img4.png)
+
+## Contribution
+
+Contributions are welcome! Please follow these basic steps:
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature-name`.
+3. Commit your changes: `git commit -m 'feat: concise description of the change'`.
+4. Push to the branch: `git push origin feature/your-feature-name`.
+5. Open a Pull Request.
