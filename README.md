@@ -71,10 +71,10 @@ Follow these steps to get the frontend and backend running locally.
 
    The application should now be accessible at `http://localhost:3000`.
 
-  ![katevapalvelut](./assests_readme/img1.png)
   ![katevapalvelut](./assests_readme/img2.png)
   ![katevapalvelut](./assests_readme/img3.png)
   ![katevapalvelut](./assests_readme/img4.png)
+  ![katevapalvelut](./assests_readme/img1.png)
 
 ## Contribution
 
