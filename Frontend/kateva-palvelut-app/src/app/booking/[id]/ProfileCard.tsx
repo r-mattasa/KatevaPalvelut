@@ -83,19 +83,20 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
         ): (
       TimeSlotDetails?.map((slot, index) => (
         <AppointmentSlot 
-            key={slot.start_time} 
-            // --- TIME SLOT DATA (Individual to this item) ---
-            booking_date= {selectedDate}
-            start_time={slot.start_time}
-            end_time= {slot.end_time}
-            duration={`${slot.duration}`} 
-            // --- BOOKING IDs (Constant for this profile/service) ---
-            profileId={profile.profile_id}
-            subserviceId={subService} 
-            // --- PROFILE DETAILS (Constant for this profile) ---
-            name={profile.name}
-            description = {profile.description}
-        />
+          key={index}
+          // --- TIME SLOT DATA (Individual to this item) ---
+          booking_date={selectedDate}
+          start_time={slot.start_time}
+          end_time={slot.end_time}
+          duration={`${slot.duration}`}
+          id={index} 
+          // --- BOOKING IDs (Constant for this profile/service) ---
+          profileId={profile.profile_id}
+          subserviceId={subService}
+          // --- PROFILE DETAILS (Constant for this profile) ---
+          name={profile.name}
+          description={profile.description}
+                 />
     ))
   ) };
     </Card>
