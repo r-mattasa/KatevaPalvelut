@@ -4,6 +4,7 @@ import { Card, Box } from "@mui/material";
 import { ProfileDetails } from "../../types/types";
 import AppointmentSlot from './AppointmentSlot';
 import { CircularProgress } from '@mui/material';
+import { NEXT_PUBLIC_API_URL } from "../../../../config";
 
 interface ProfileDetailsProps {
   key: number;
@@ -31,7 +32,7 @@ const ProfileCard: React.FC<ProfileDetailsProps> = ({ key, profile, selectedDate
   useEffect(() => {
     if (!providerId || !selectedDate) return; 
 
-    const apiUrl = `http://localhost:5000/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
+    const apiUrl = `${NEXT_PUBLIC_API_URL}/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
 
     const fetchTimeSlots = async () => {
       setIsLoading(true);

@@ -7,8 +7,8 @@ export const addServiceData = async (req: Request, res: Response) => {
   const { name, description, image_url } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO services (name, description, image_url) VALUES ($1, $2) RETURNING *",
-      [name, description, image_url]
+      "INSERT INTO services (name, description) VALUES ($1, $2) RETURNING *",
+      [name, description]
     );
     res.json(result.rows[0]);
   } catch (err) {

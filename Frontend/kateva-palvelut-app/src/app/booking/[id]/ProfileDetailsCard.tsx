@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Avatar, Box, Card, Typography, Divider,  Stack, useTheme, Collapse, IconButton } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // For the dropdown toggle
 import { ProfileDetails } from '../../types/types';
+import { NEXT_PUBLIC_API_URL } from '../../../../config';
 
 interface ProfileDetailsProps {
   key: number;
@@ -27,7 +28,7 @@ const ProfileDetailsCard: React.FC<ProfileDetailsProps> = ({key, profile, select
   };
   const providerId = profile.profile_id;
  
-  const apiUrl = `http://localhost:5000/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
+  const apiUrl = `${NEXT_PUBLIC_API_URL}/reservation/${providerId}/slots?bookingDate=${selectedDate}`;
 
 // Fetch the data
 fetch(apiUrl)

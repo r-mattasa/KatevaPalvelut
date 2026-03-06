@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { NEXT_PUBLIC_API_URL } from '../../../config';
 
 // Define a generic type for the resource,
 // T will represent the structure of a Todo, Service, Booking, etc.
@@ -12,9 +13,9 @@ export interface Identifiable {
 // Function that creates a service for a specific resource path
 const createGenericService = <T extends Identifiable>(resourcePath: string) => {
   // The base URL for the API
-  const API_BASE_URL = 'http://localhost:5000';
-  // Construct the full URL for the resource (e.g., 'http://localhost:5000/api/tasks')
-  const baseUrl = `${API_BASE_URL}/${resourcePath}`;
+  // const API_BASE_URL = '${NEXT_PUBLIC_API_URL}';
+  // Construct the full URL for the resource (e.g., '${NEXT_PUBLIC_API_URL}/api/tasks')
+  const baseUrl = `${NEXT_PUBLIC_API_URL}/${resourcePath}`;
 
   /**
    * Fetches all resources of type T.

@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { BookingProps, ConfirmationProps } from "../types/types";
 import ReservationConfirmation from "./reservation-confirmation";
 import { useRouter } from "next/navigation";
+import { NEXT_PUBLIC_API_URL } from "../../../config";
 
 interface FormData {
   firstName: string;
@@ -73,7 +74,7 @@ const BookingConfirmationForm: React.FC<BookingProps> = (props) => {
       booking: props, // get data from URLSearchParams
     };
     try {
-      const response = await fetch("http://localhost:5000/reservation/book-appointment", {
+      const response = await fetch(`${NEXT_PUBLIC_API_URL}/reservation/book-appointment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

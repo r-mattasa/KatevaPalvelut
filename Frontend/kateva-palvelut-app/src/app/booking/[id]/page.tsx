@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { ProfileDetailsList } from './ProfileDetailsList';
 import { useParams } from 'next/navigation';
+import { NEXT_PUBLIC_API_URL } from '../../../../config';
 // Import other MUI components like Card, Avatar, Button, etc.
 // Import your custom components (Header, ProfileDetails, CalendarComponent)
 
@@ -18,7 +19,7 @@ const ServiceProfileAndCalendarPage = () => {
 
   const fetchAvailableProfiles = async (date: string) => {
     setSelectedDate(date);
-    const response = await axios.get("http://localhost:5000/reservation", {
+    const response = await axios.get(`${NEXT_PUBLIC_API_URL}/reservation`, {
       params: { booking_date: date, subservice_id: subserviceId }
     });
     setProfiles(response.data);
