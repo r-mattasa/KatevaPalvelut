@@ -47,7 +47,7 @@ export interface BookingDetails extends Identifiable {
 }
 
 export interface AppointmentSlotProps {
-  id:string | number;
+  id:number;
   start_time: string;
   end_time: string;
   booking_date: string; 
